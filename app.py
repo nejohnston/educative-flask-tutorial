@@ -3,7 +3,7 @@ Flask Tutorial
 Nicholas Johnston
 December 20, 2020
 """
-from flask import Flask, render_template, abort
+from flask import Flask, render_template, abort, request
 
 app = Flask(__name__)
 
@@ -43,7 +43,7 @@ def details(pet_id):
     return render_template("details.html", pet=pet)
 
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login():
     """
     Login to the website
