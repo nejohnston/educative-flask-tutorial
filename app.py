@@ -15,6 +15,8 @@ pets = [
     {"id": 3, "name": "Basker", "age": "1 year", "bio": "I love barking. But, I love my friends more."},
     {"id": 4, "name": "Mr. Furrkins", "age": "5 years", "bio": "Probably napping."},
 ]
+"""User information"""
+users = {}
 
 
 @app.route("/")
@@ -48,6 +50,12 @@ def login():
     """
     Login to the website
     """
+    if request.method == "POST":
+        email = request.form["email"]
+        password = request.form["password"]
+        if email in users[email] == password:
+            return render_template("login.html", message="Successfully Logged In")
+        return render_template("login.html", message="Incorrect Email or Password")
     return render_template("login.html")
 
 
