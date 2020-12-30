@@ -43,5 +43,13 @@ def details(pet_id):
     return render_template("details.html", pet=pet)
 
 
+@app.route("/login")
+def login():
+    """
+    Login to the website
+    """
+    return render_template("login.html")
+
+
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=3000)
