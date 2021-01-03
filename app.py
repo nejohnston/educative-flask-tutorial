@@ -4,6 +4,7 @@ Nicholas Johnston
 December 20, 2020
 """
 from flask import Flask, render_template, abort, request
+from forms import LoginForm
 
 app = Flask(__name__)
 
@@ -16,7 +17,10 @@ pets = [
     {"id": 4, "name": "Mr. Furrkins", "age": "5 years", "bio": "Probably napping."},
 ]
 """User information"""
-users = {}
+users = {
+    "archie.andrews@email.com": "football4life",
+    "veronica.lodge@email.com": "fashiondiva"
+}
 
 
 @app.route("/")
@@ -50,13 +54,8 @@ def login():
     """
     Login to the website
     """
-    if request.method == "POST":
-        email = request.form["email"]
-        password = request.form["password"]
-        if email in users[email] == password:
-            return render_template("login.html", message="Successfully Logged In")
-        return render_template("login.html", message="Incorrect Email or Password")
-    return render_template("login.html")
+    form = LoginForm()
+    return render_template("login.html", form=form)
 
 
 if __name__ == "__main__":
