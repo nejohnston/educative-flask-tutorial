@@ -80,6 +80,7 @@ def signup():
                     "full_name": form.full_name.data,
                     "email": form.email.data,
                     "password": form.password.data}
+        users.append(new_user)
     return render_template('signup.html', form=form)
 
 
