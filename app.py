@@ -4,7 +4,7 @@ Nicholas Johnston
 December 20, 2020
 """
 from flask import Flask, render_template, abort
-from forms import LoginForm, SignupForm
+from forms import LoginForm, SignUpForm
 
 app = Flask(__name__)
 
@@ -74,7 +74,7 @@ def signup():
     """
     Signup for an account
     """
-    form = SignupForm()
+    form = SignUpForm()
     return render_template('signup.html', form=form)
 
 
