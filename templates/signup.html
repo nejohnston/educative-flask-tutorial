@@ -35,6 +35,14 @@ Sign Up
     <br>
     {{ form.email }}
     <br>
+    {% if form.email.errors %}
+        {% for error in form.email.errors %}
+        <b style="color: tomato">
+        {{ error }}
+        </b>
+        <br>
+        {% endfor %}
+    {% endif %}
     {# Password Field #}
     {{ form.password.label }}:
     <br>
