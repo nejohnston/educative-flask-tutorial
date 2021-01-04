@@ -69,7 +69,7 @@ def login():
     return render_template("login.html", form=form)
 
 
-@app.route('/signup', methods=["POST"])
+@app.route('/signup', methods=["GET", "POST"])
 def signup():
     """
     Signup for an account
