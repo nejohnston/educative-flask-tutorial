@@ -3,7 +3,7 @@ Flask Tutorial
 Nicholas Johnston
 December 20, 2020
 """
-from flask import Flask, render_template, abort, request
+from flask import Flask, render_template, abort
 from forms import LoginForm
 
 app = Flask(__name__)
@@ -18,9 +18,11 @@ pets = [
 ]
 """User information"""
 users = {
-    "archie.andrews@email.com": "football4life",
-    "veronica.lodge@email.com": "fashiondiva"
+    "a": "a",
+    "veronica@email.com": "fashiondiva"
 }
+
+app.config['SECRET_KEY'] = 'dfewfew123213rwdsgert34tgfd1234trgf'
 
 
 @app.route("/")
@@ -55,6 +57,14 @@ def login():
     Login to the website
     """
     form = LoginForm()
+
+    if form.validate_on_submit():
+        print("Submitted and valid.")
+    elif form.errors:
+        print(form.errors.items())
+        print(form.email.errors)
+        print(form.password.errors)
+
     return render_template("login.html", form=form)
 
 
