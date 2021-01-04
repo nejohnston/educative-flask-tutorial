@@ -4,7 +4,7 @@ Nicholas Johnston
 December 20, 2020
 """
 from flask import Flask, render_template, abort
-from forms import LoginForm
+from forms import LoginForm, SignupForm
 
 app = Flask(__name__)
 
@@ -59,13 +59,23 @@ def login():
     form = LoginForm()
 
     if form.validate_on_submit():
-        print("Submitted and valid.")
+        print("Email:", form.email.data)
+        print("Password:", form.password.data)
     elif form.errors:
         print(form.errors.items())
         print(form.email.errors)
         print(form.password.errors)
 
     return render_template("login.html", form=form)
+
+
+@app.route('/signup', methods=["POST"])
+def signup():
+    """
+    Signup for an account
+    """
+    form = SignupForm()
+    return render_template('signup.html', form=form)
 
 
 if __name__ == "__main__":
