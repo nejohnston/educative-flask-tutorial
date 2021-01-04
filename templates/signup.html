@@ -17,22 +17,31 @@ Sign Up
 {% if form %}
     <form action="{{ url_for('signup') }}" method="POST" style="padding: 5px;">
     {# Full Name Field #}
-    {{ form.full_name.label }}
-        <br>
+    {{ form.full_name.label }}:
+    <br>
     {{ form.full_name }}
     <br>
+        {% if form.full_name.errors %}
+            {% for error in form.full_name.errors %}
+                <b style="color: tomato">
+                    {{ error }}
+                </b>
+                <br>
+            {% endfor %}
+        {% endif %}
+
     {# Email Field #}
-    {{ form.email.label }}
+    {{ form.email.label }}:
     <br>
     {{ form.email }}
     <br>
     {# Password Field #}
-    {{ form.password.label }}
+    {{ form.password.label }}:
     <br>
     {{ form.password }}
     <br>
     {# Confirm Password Field #}
-    {{ form.confirm_password.label }}
+    {{ form.confirm_password.label }}:
     <br>
     {{ form.confirm_password }}
     <br>
