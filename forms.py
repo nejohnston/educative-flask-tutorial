@@ -15,8 +15,8 @@ class LoginForm(FlaskForm):
 
 
 class SignUpForm(FlaskForm):
-    name = StringField('Full Name')
+    full_name = StringField('Full Name')
     email = StringField('Email')
     password = PasswordField('Password', validators=[InputRequired()])
-    pass_check = PasswordField('Confirm', validators=[EqualTo('password'), InputRequired()])
+    confirm_password = PasswordField('Confirm', validators=[EqualTo('password'), InputRequired()])
     submit = SubmitField('Sign Up')

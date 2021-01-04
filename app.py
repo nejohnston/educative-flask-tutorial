@@ -17,10 +17,9 @@ pets = [
     {"id": 4, "name": "Mr. Furrkins", "age": "5 years", "bio": "Probably napping."},
 ]
 """User information"""
-users = {
-    "a": "a",
-    "veronica@email.com": "fashiondiva"
-}
+users = [
+    {"id": 1, "full_name": "Pet Rescue Team", "email": "team@pawsrescue.co", "password": "adminpass"}
+]
 
 app.config['SECRET_KEY'] = 'dfewfew123213rwdsgert34tgfd1234trgf'
 
@@ -75,6 +74,12 @@ def signup():
     Signup for an account
     """
     form = SignUpForm()
+
+    if form.validate_on_submit():
+        new_user = {"id": len(users)+1,
+                    "full_name": form.full_name.data,
+                    "email": form.email.data,
+                    "password": form.password.data}
     return render_template('signup.html', form=form)
 
 

@@ -11,20 +11,24 @@ Sign Up
 {% block content %}
     <form action="{{ url_for('signup') }}" method="POST" style="padding: 5px;">
     {# Full Name Field #}
-    {{ form.name.label }}
-    {{ form.name }}
+    {{ form.full_name.label }}
+        <br>
+    {{ form.full_name }}
     <br>
     {# Email Field #}
     {{ form.email.label }}
+    <br>
     {{ form.email }}
     <br>
     {# Password Field #}
     {{ form.password.label }}
+    <br>
     {{ form.password }}
     <br>
     {# Confirm Password Field #}
-    {{ form.pass_check.label }}
-    {{ form.pass_check }}
+    {{ form.confirm_password.label }}
+    <br>
+    {{ form.confirm_password }}
     <br>
     {# Hidden CSRF Token #}
     {{ form.csrf_token }}
