@@ -81,6 +81,7 @@ def signup():
                     "email": form.email.data,
                     "password": form.password.data}
         users.append(new_user)
+        return render_template('signup.html', message="Successful signup")
     return render_template('signup.html', form=form)
 
 

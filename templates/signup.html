@@ -9,6 +9,12 @@ Sign Up
 {% endblock %}
 
 {% block content %}
+
+{% if message %}
+    {{ message }}
+{% endif %}
+
+{% if form %}
     <form action="{{ url_for('signup') }}" method="POST" style="padding: 5px;">
     {# Full Name Field #}
     {{ form.full_name.label }}
@@ -33,4 +39,5 @@ Sign Up
     {# Hidden CSRF Token #}
     {{ form.csrf_token }}
     </form>
+{% endif %}
 {% endblock %}
