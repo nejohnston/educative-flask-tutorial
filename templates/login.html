@@ -15,16 +15,22 @@ Login Page
     <br>
     {% if form.email.errors %}
         <br>
-        <ul>
         {% for error in form.email.errors %}
-        <li id="error">{{ error }}</li>
+        <b style="color: tomato;">{{ error }}</b>
+            <br>
         {% endfor %}
-        </ul>
+    {% endif %}
     {{ form.password.label }}: {{ form.password }}
     <br>
+    {% if form.password.errors %}
+        <br>
+        {% for error in form.password.errors %}
+        <b style="color: tomato">{{ error }}</b>
+            <br>
+        {% endfor %}
+    {% endif %}
     {{ form.csrf_token }}
-     {{ form.submit }}
+    {{ form.submit }}
 </form>
 {% endif %}
-<hr>
 {% endblock %}
