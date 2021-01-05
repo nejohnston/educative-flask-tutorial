@@ -65,14 +65,9 @@ def login():
             if user_email == form.email.data and user_password == form.password.data:
                 return render_template('login.html', message="Successful login")
         return render_template('login.html', message='Incorrect Email or Password')
-        print("Email:", form.email.data)
-        print("Password:", form.password.data)
     elif form.errors:
         print(form.errors.items())
-        print(form.email.errors)
-        print(form.password.errors)
-
-    return render_template("login.html", form=form)
+    return render_template('login.html', form=form)
 
 
 @app.route("/logout")
