@@ -5,8 +5,13 @@ December 20, 2020
 """
 from flask import Flask, render_template, abort, redirect, session, url_for
 from forms import LoginForm, SignUpForm
+from flask_sqlalchemy import SQLAlchemy
+
 
 app = Flask(__name__)
+database = SQLAlchemy(app)
+app.config['SECRET_KEY'] = 'dfewfew123213rwdsgert34tgfd1234trgf'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///example.db'
 
 """Information regarding the Pets in the System."""
 pets = [
@@ -20,8 +25,6 @@ pets = [
 users = [
     {"id": 1, "full_name": "Pet Rescue Team", "email": "team@pawsrescue.co", "password": "adminpass"}
 ]
-
-app.config['SECRET_KEY'] = 'dfewfew123213rwdsgert34tgfd1234trgf'
 
 
 @app.route("/")
@@ -58,6 +61,10 @@ def login():
     form = LoginForm()
 
     if form.validate_on_submit():
+        for user_email, user_password in users.items():
+            if user_email == form.email.data and user_password == form.password.data:
+                return render_template('login.html', message="Successful login")
+        return render_template('login.html', message='Incorrect Email or Password')
         print("Email:", form.email.data)
         print("Password:", form.password.data)
     elif form.errors:

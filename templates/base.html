@@ -10,8 +10,12 @@
         <ul>
             <li style="display: inline"><a href="{{ url_for('home') }}">Home</a></li>
             <li style="display: inline"><a href="{{ url_for('about') }}">About</a></li>
+            {% if user in session %}
+            <li style="display: inline"><a href="{{ url_for('Logout') }}">Logout</a></li>
+            {% else %}
             <li style="display: inline"><a href="{{ url_for('signup') }}">Signup</a></li>
             <li style="display: inline"><a href="{{ url_for('login') }}">Login</a></li>
+            {% endif %}
         </ul>
     </div>
     <h1 id="title"> {% block heading %} {% endblock %} </h1>
