@@ -3,7 +3,7 @@ Flask Tutorial
 Nicholas Johnston
 December 20, 2020
 """
-from flask import Flask, render_template, abort
+from flask import Flask, render_template, abort, redirect, session, url_for
 from forms import LoginForm, SignUpForm
 
 app = Flask(__name__)
@@ -66,6 +66,16 @@ def login():
         print(form.password.errors)
 
     return render_template("login.html", form=form)
+
+
+@app.route("/logout")
+def logout():
+    """
+    Logout of an account
+    """
+    if 'user' in session:
+        session.pop('user')
+    return redirect(url_for('homepage', _scheme='https', _external=True))
 
 
 @app.route('/signup', methods=["GET", "POST"])
