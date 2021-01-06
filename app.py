@@ -7,7 +7,6 @@ from flask import Flask, render_template, abort, redirect, session, url_for
 from forms import LoginForm, SignUpForm
 from flask_sqlalchemy import SQLAlchemy
 
-
 app = Flask(__name__)
 database = SQLAlchemy(app)
 app.config['SECRET_KEY'] = 'dfewfew123213rwdsgert34tgfd1234trgf'
@@ -61,12 +60,16 @@ def login():
     form = LoginForm()
 
     if form.validate_on_submit():
-        for user_email, user_password in users.items():
-            if user_email == form.email.data and user_password == form.password.data:
-                return render_template('login.html', message="Successful login")
-        return render_template('login.html', message='Incorrect Email or Password')
-    elif form.errors:
-        print(form.errors.items())
+        user = next(
+            (user for user in users if user["email"] == form.email.data and user["password"] == form.password.data),
+            None)
+        if user is None:
+            return render_template('login.html', form=form, message="Wrong credentials. Please try again.")
+        elif form.errors:
+            print(form.errors.items())
+        else:
+            session['user'] = user
+            return render_template('login.html', form=form, message='Successfully Logged In!')
     return render_template('login.html', form=form)
 
 
@@ -88,14 +91,13 @@ def signup():
     form = SignUpForm()
 
     if form.validate_on_submit():
-        new_user = {"id": len(users)+1,
+        new_user = {"id": len(users) + 1,
                     "full_name": form.full_name.data,
                     "email": form.email.data,
                     "password": form.password.data}
         users.append(new_user)
         return render_template('signup.html', message="Successful signup")
     return render_template('signup.html', form=form)
-
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=3000)
